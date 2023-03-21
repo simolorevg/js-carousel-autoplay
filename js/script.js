@@ -16,6 +16,7 @@ imgContainerArray[0].classList.add("active");//parte dalla prima immagine
 const upBtn = document.querySelector('.up');
 const downBtn = document.querySelector('.down');//creo le variabili per poter utilizzare i pulsanti up e down
 upBtn.addEventListener("click", function () {
+    freezeCarousel();
     downBtn.classList.remove('hidden');//faccio riapparire il pulsante down
     if (containerIndex === imgContainerArray.length - 1) { //se arrivo in fondo al carosello mi fa ripartire da capo
         // upBtn.classList.add("hidden");
@@ -31,6 +32,7 @@ upBtn.addEventListener("click", function () {
 });
 let containerArrayLenght = imgContainerArray.length;//questo mi servirà per il superbonus
 downBtn.addEventListener("click", function () {
+    freezeCarousel();
     upBtn.classList.remove('hidden');// faccio riapparire i pulsante up
     if (containerIndex === 0) { //se arrivo in fondo al carosello ricomincio da capo
         // downBtn.classList.add("hidden");
@@ -55,6 +57,10 @@ function automaticTransitionCarousel(){
         imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
     console.log('passo a nuova immagine, containerIndex: '+containerIndex);
+}
+function freezeCarousel(){
+    console.log('metto in pausa il carosello');
+    setTimeout(carouselAutomatic, 1000);
 }
 /////////CREO INTERVALLO
 const carouselAutomatic = setInterval(automaticTransitionCarousel,3000);//ho riportato il programma eseguito sull'upBTN, mettendo l'intervallo dopo 2 secondi
