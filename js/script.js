@@ -43,10 +43,9 @@ downBtn.addEventListener("click", function () {
         imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
 });
-/////////CREO INTERVALLO
-const carouselAutomatic = setInterval(function(){
+/////////FUNZIONE DEDICATA PER IL CAROSELLO AUTOMATICO
+function automaticTransitionCarousel(){
     if (containerIndex === imgContainerArray.length - 1) { //se arrivo in fondo al carosello mi fa ripartire da capo
-        // upBtn.classList.add("hidden");
         imgContainerArray[containerIndex].classList.remove('active');//rimuovo la classe active all'immagine corrente
         containerIndex = 0;//riporto all'inizio l'indice
         imgContainerArray[containerIndex].classList.add('active');//aggiungo active all'immagine successiva
@@ -55,4 +54,7 @@ const carouselAutomatic = setInterval(function(){
         containerIndex++;//incremento di uno l'indice
         imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
-},2000);//ho riportato il programma eseguito sull'upBTN, mettendo l'intervallo dopo 2 secondi
+    console.log('passo a nuova immagine, containerIndex: '+containerIndex);
+}
+/////////CREO INTERVALLO
+const carouselAutomatic = setInterval(automaticTransitionCarousel,3000);//ho riportato il programma eseguito sull'upBTN, mettendo l'intervallo dopo 2 secondi
