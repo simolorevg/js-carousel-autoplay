@@ -17,21 +17,16 @@ const upBtn = document.querySelector('.up');
 const downBtn = document.querySelector('.down');//creo le variabili per poter utilizzare i pulsanti up e down
 upBtn.addEventListener("click", function () {
     downBtn.classList.remove('hidden');//faccio riapparire il pulsante down
+    clearInterval(automaticTransitionCarousel);
     automaticTransitionCarousel();
+    setInterval(automaticTransitionCarousel,3000);
 });
 let containerArrayLenght = imgContainerArray.length;//questo mi servirà per il superbonus
 downBtn.addEventListener("click", function () {
     upBtn.classList.remove('hidden');// faccio riapparire i pulsante up
-    if (containerIndex === 0) { //se arrivo in fondo al carosello ricomincio da capo
-        // downBtn.classList.add("hidden");
-        imgContainerArray[containerIndex].classList.remove('active');
-        containerIndex = containerArrayLenght - 1;
-        imgContainerArray[containerIndex].classList.add('active');
-    } else {
-        imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
-        containerIndex--;//decremento di uno l'indice
-        imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
-    }
+    clearInterval(automaticTransitionCarousel);
+    carouselPrev();
+    setInterval(automaticTransitionCarousel,3000);
 });
 /////////FUNZIONE DEDICATA PER IL CAROSELLO AUTOMATICO
 function automaticTransitionCarousel(){
@@ -45,6 +40,18 @@ function automaticTransitionCarousel(){
         imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
     }
     console.log('passo a nuova immagine, containerIndex: '+containerIndex);
+}
+function carouselPrev(){
+    if (containerIndex === 0) { //se arrivo in fondo al carosello ricomincio da capo
+        // downBtn.classList.add("hidden");
+        imgContainerArray[containerIndex].classList.remove('active');
+        containerIndex = containerArrayLenght - 1;
+        imgContainerArray[containerIndex].classList.add('active');
+    } else {
+        imgContainerArray[containerIndex].classList.remove("active");//nascondo l'immagine corrente
+        containerIndex--;//decremento di uno l'indice
+        imgContainerArray[containerIndex].classList.add('active');//faccio apparire l'immagine successiva
+    }
 }
 /////////CREO INTERVALLO
 const carouselAutomatic = setInterval(automaticTransitionCarousel,3000);//ho riportato il programma eseguito sull'upBTN, mettendo l'intervallo dopo 2 secondi
